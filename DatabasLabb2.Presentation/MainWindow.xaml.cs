@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using DatabasLabb2.Infrastructure.Data.Model;
+using DatabasLabb2.Presentation.ViewModels;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +21,8 @@ namespace DatabasLabb2.Presentation
         public MainWindow()
         {
             InitializeComponent();
+
+           DataContext = new MainWindowViewModel();
         }
     }
 }
