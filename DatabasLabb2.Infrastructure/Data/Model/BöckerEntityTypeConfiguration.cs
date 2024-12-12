@@ -36,7 +36,7 @@ public class BöckerEntityTypeConfiguration : IEntityTypeConfiguration<Böcker>
             builder.HasOne(d => d.Leverantörs).WithMany(p => p.Böckers)
                 .HasForeignKey(d => d.LeverantörsId)
                 .HasConstraintName("FK_Böcker_Leverantörer");
-        });
+        };
     }
 }
 

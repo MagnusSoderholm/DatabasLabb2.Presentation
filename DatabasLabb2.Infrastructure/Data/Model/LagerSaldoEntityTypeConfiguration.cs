@@ -29,7 +29,7 @@ public class LagerSaldoEntityTypeConfiguration : IEntityTypeConfiguration<LagerS
                 .HasForeignKey(d => d.Isbn)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_LagerSaldo_ISBN");
-        });
+        };
     }
 }
 

@@ -21,7 +21,7 @@ public class LeverantörerEntityTypeConfiguration : IEntityTypeConfiguration<Lev
             builder.Property(e => e.Postnummer).HasMaxLength(50);
             builder.Property(e => e.Stad).HasMaxLength(50);
             builder.Property(e => e.Telefonnummer).HasMaxLength(20);
-        });
+        };
     }
 }
 

@@ -18,7 +18,7 @@ public class BuikerEntityTypeConfiguration : IEntityTypeConfiguration<Butiker>
             builder.Property(e => e.Namn).HasMaxLength(50);
             builder.Property(e => e.Postnummer).HasMaxLength(6);
             builder.Property(e => e.Stad).HasMaxLength(50);
-        });
+        };
     }
 }
 

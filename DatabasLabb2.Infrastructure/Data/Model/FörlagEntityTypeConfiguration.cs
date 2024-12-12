@@ -18,7 +18,7 @@ public class FörlagEntityTypeConfiguration : IEntityTypeConfiguration<Förlag>
             builder.Property(e => e.Postnummer).HasMaxLength(50);
             builder.Property(e => e.Stad).HasMaxLength(50);
             builder.Property(e => e.Telefonnummer).HasMaxLength(50);
-        });
+        };
     }
 }
 

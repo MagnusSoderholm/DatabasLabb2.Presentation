@@ -21,7 +21,7 @@ public class TitlarPerFörfattareEntityTypeConfiguration : IEntityTypeConfigurat
             builder.Property(e => e.Ålder)
                 .HasMaxLength(25)
                 .IsUnicode(false);
-        });
+        };
     }
 }
 

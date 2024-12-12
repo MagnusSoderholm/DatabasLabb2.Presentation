@@ -15,7 +15,7 @@ public class FörfatareEntityTypeConfiguration : IEntityTypeConfiguration<Förfa
             builder.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("ID");
-        });
+        };
     }
 }
 
