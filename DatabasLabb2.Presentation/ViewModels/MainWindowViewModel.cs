@@ -13,9 +13,26 @@ namespace DatabasLabb2.Presentation.ViewModels
     {
         public ObservableCollection<string> Butiker { get; private set; }
 
+        private string? _selectButiker;
+
+        public string? SelectButiker
+        {
+            get => _selectButiker;
+            set
+            {
+                _selectButiker = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Butiker> ButikerDetails { get; private set; }
+
+
+
         public MainWindowViewModel()
         {
             LoadButiker();
+            LoadButikerDetails();
         }
 
         private void LoadButiker()
@@ -25,6 +42,20 @@ namespace DatabasLabb2.Presentation.ViewModels
             Butiker = new ObservableCollection<string>(
                 db.Butikers.Select(b => b.Namn).Distinct().ToList()
                 );
+
+            SelectButiker = Butiker.FirstOrDefault();
+        }
+
+
+        private void LoadButikerDetails()
+        {
+            using var db = new BokhandelContext();
+
+            ButikerDetails = new ObservableCollection<Butiker>(
+                db.Butikers.ToList()
+                );
+
+            SelectButiker = Butiker.FirstOrDefault();
         }
     }
 }

@@ -19,11 +19,13 @@
                       VerticalAlignment="Center" 
                       Margin="10"
                       ItemsSource="{Binding Butiker}"
+                      SelectedItem="{Binding SelectButiker}"
                       />
 
         </StackPanel>
 
-        <DataGrid Grid.Row="1">
+        <DataGrid Grid.Row="1"
+                  ItemsSource="{Binding ButikerDetails}">
             
         </DataGrid>
     </Grid>
