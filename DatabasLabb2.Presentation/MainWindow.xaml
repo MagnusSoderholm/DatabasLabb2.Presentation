@@ -19,7 +19,7 @@
                       VerticalAlignment="Center" 
                       Margin="10"
                       ItemsSource="{Binding Butiker}"
-                      SelectedItem="{Binding SelectButiker}"
+                      SelectedItem="{Binding SelectedButiker}"
                       />
 
         </StackPanel>
