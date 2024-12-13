@@ -23,7 +23,7 @@ namespace DatabasLabb2.Presentation.ViewModels
                 _selectedButiker = value;
                 RaisePropertyChanged();
                 LoadButikerDetails();
-                RaisePropertyChanged();
+                RaisePropertyChanged("ButikerDetails");
             }
         }
 
@@ -54,10 +54,10 @@ namespace DatabasLabb2.Presentation.ViewModels
             using var db = new BokhandelContext();
 
             ButikerDetails = new ObservableCollection<Butiker>(
-                db.Butikers.Where(b => b.Adress == SelectedButiker).ToList()
+                db.Butikers.Where(b => b.Namn == SelectedButiker).ToList()
                 );
 
-            SelectedButiker = Butiker.FirstOrDefault();
+           
         }
     }
 }
