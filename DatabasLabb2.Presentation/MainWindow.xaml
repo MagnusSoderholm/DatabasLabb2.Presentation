@@ -28,9 +28,14 @@
 
         <DataGrid Grid.Row="1"
               AutoGenerateColumns="False"
+              IsReadOnly="True"
               ItemsSource="{Binding LagerSaldos}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Titel" Binding="{Binding Isbn}"/>
+                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
+                <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
+                <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
+                <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
+                <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
                 <DataGridTextColumn Header="Lagersaldo" Binding="{Binding Antal}"/>
                
             </DataGrid.Columns>

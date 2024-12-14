@@ -11,6 +11,8 @@ public partial class Författare
 
     public string? Efternamn { get; set; }
 
+    public string FullName => $"{Efternamn}, {Förnamn}";
+
     public DateTime? Födelsedatum { get; set; }
 
     public DateTime? Dödsdatum { get; set; }

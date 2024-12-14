@@ -1,12 +1,7 @@
 ﻿using DatabasLabb2.Domain;
 using DatabasLabb2.Infrastructure.Data.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DatabasLabb2.Presentation.ViewModels
 {
@@ -64,7 +59,11 @@ namespace DatabasLabb2.Presentation.ViewModels
             using var db = new BokhandelContext();
 
             LagerSaldos = new ObservableCollection<LagerSaldo>(
-                db.LagerSaldos.Where(l => l.ButikId == SelectedStore.Id).ToList()
+                db.LagerSaldos
+                .Where(l => l.ButikId == SelectedStore.Id)
+                .Include(l => l.IsbnNavigation)
+                .ThenInclude(l => l.Författare)
+                .ToList()
                 );
 
 
