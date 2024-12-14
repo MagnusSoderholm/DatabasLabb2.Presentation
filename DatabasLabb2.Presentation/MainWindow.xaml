@@ -27,13 +27,12 @@
 
 
         <DataGrid Grid.Row="1"
-              AutoGenerateColumns="True"
+              AutoGenerateColumns="False"
               ItemsSource="{Binding LagerSaldos}">
             <DataGrid.Columns>
-                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
-                <DataGridTextColumn Header="Adress" Binding="{Binding Adress}"/>
-                <DataGridTextColumn Header="Postnummer" Binding="{Binding Postnummer}" />
-                <DataGridTextColumn Header="Lagersaldo" Binding="{Binding LagerSaldo}"/>-->
+                <DataGridTextColumn Header="Titel" Binding="{Binding Isbn}"/>
+                <DataGridTextColumn Header="Lagersaldo" Binding="{Binding Antal}"/>
+               
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
