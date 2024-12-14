@@ -1,5 +1,6 @@
 ﻿using DatabasLabb2.Domain;
 using DatabasLabb2.Infrastructure.Data.Model;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,53 +12,62 @@ namespace DatabasLabb2.Presentation.ViewModels
 {
     internal class MainWindowViewModel : ViewModelBase
     {
-        public ObservableCollection<string> Butiker { get; private set; }
+        public ObservableCollection<Butiker> Stores { get; private set; }
 
-        private string? _selectedButiker;
+        private Butiker? _selectedStore;
 
-        public string? SelectedButiker
+        public Butiker? SelectedStore
         {
-            get => _selectedButiker;
+            get => _selectedStore;
             set
             {
-                _selectedButiker = value;
+                _selectedStore = value;
+
+
+                if (_selectedStore != null) // Kontrollera att en butik är vald
+                {
+                    LoadLagerSaldo();
+                }
+
+                //LoadLagerSaldo();
+
                 RaisePropertyChanged();
-                LoadButikerDetails();
-                RaisePropertyChanged("ButikerDetails");
+
+                RaisePropertyChanged("LagerSaldos");
             }
         }
 
-        public ObservableCollection<Butiker> ButikerDetails { get; private set; }
-
+        public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
 
 
         public MainWindowViewModel()
         {
-            LoadButiker();
+            LoadStores();
            
         }
 
-        private void LoadButiker()
+        private void LoadStores()
         {
+
             using var db = new BokhandelContext();
 
-            Butiker = new ObservableCollection<string>(
-                db.Butikers.Select(b => b.Namn).Distinct().ToList()
-                );
+            Stores = new ObservableCollection<Butiker>(
+                 db.Butikers.ToList()
+                 );
 
-            SelectedButiker = Butiker.FirstOrDefault();
+            SelectedStore = Stores.FirstOrDefault();
         }
 
 
-        private void LoadButikerDetails()
+        private void LoadLagerSaldo()
         {
             using var db = new BokhandelContext();
 
-            ButikerDetails = new ObservableCollection<Butiker>(
-                db.Butikers.Where(b => b.Namn == SelectedButiker).ToList()
+            LagerSaldos = new ObservableCollection<LagerSaldo>(
+                db.LagerSaldos.Where(l => l.ButikId == SelectedStore.Id).ToList()
                 );
 
-           
+
         }
     }
 }

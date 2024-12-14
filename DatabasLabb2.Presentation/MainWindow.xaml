@@ -18,15 +18,23 @@
             <ComboBox Width="200" 
                       VerticalAlignment="Center" 
                       Margin="10"
-                      ItemsSource="{Binding Butiker}"
-                      SelectedItem="{Binding SelectedButiker}"
+                      ItemsSource="{Binding Stores}"
+                      DisplayMemberPath="Namn"
+                      SelectedItem="{Binding SelectedStore}"
                       />
 
         </StackPanel>
 
+
         <DataGrid Grid.Row="1"
-                  ItemsSource="{Binding ButikerDetails}">
-            
+              AutoGenerateColumns="True"
+              ItemsSource="{Binding LagerSaldos}">
+            <DataGrid.Columns>
+                <!--<DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Adress" Binding="{Binding Adress}"/>
+                <DataGridTextColumn Header="Postnummer" Binding="{Binding Postnummer}" />
+                <DataGridTextColumn Header="Lagersaldo" Binding="{Binding LagerSaldo}"/>-->
+            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
