@@ -38,7 +38,6 @@
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Style.Triggers>
-                                            <!-- Trigger för när det är "Slut i lager" -->
                                             <DataTrigger Binding="{Binding SaldoText}" Value="Slut i lager">
                                                 <Setter Property="Foreground" Value="Red" />
                                                 <Setter Property="FontStyle" Value="Italic" />
@@ -50,12 +49,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
                 <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
+                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
              
                
             </DataGrid.Columns>
