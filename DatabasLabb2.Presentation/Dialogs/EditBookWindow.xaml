@@ -1,0 +1,76 @@
+﻿<Window x:Class="DatabasLabb2.Presentation.Dialogs.EditBookWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DatabasLabb2.Presentation.Dialogs"
+        mc:Ignorable="d"
+        Title="EditBookWindow" Height="500" Width="350">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+
+            
+                <Label Content="Boktitel:" FontWeight="Bold"/>
+            <TextBox Text="" Margin="5,0" Height="25" Width="250" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="ISBN13:" FontWeight="Bold" FontSize="10" VerticalAlignment="Center"/>
+                <TextBox Text="" Margin="5" Height="25" Width="200" HorizontalAlignment="Left"/>
+
+            </StackPanel>
+            <Label Content="Författare:" FontWeight="Bold" Margin="0,10,0,0"/>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Förnamn" Margin="5,0" Height="25" Width="120" HorizontalAlignment="Left" />
+                <Label Content="Efternamn" Margin="5,0" Height="25" Width="120" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Text="" Margin="5,0,5,5" Height="25" Width="120" HorizontalAlignment="Left" />
+                <TextBox Text="" Margin="5,0,5,5" Height="25" Width="120" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            
+                    <Label Content="Språk" FontWeight="Bold"/>
+            <ComboBox Text="" Margin="5,0" Height="25" Width="150" HorizontalAlignment="Left">
+                <ComboBoxItem>Svenska</ComboBoxItem>
+                <ComboBoxItem>Engelska</ComboBoxItem>
+                <ComboBoxItem>Danska</ComboBoxItem>
+                <ComboBoxItem>Norska</ComboBoxItem>
+                <ComboBoxItem>Finska</ComboBoxItem>
+                <ComboBoxItem>Tyska</ComboBoxItem>
+                <ComboBoxItem>Franska</ComboBoxItem>
+            </ComboBox>
+
+            <Label Content="Genre" FontWeight="Bold"/>
+            <ComboBox Text="" Margin="5,0" Height="25" Width="150" HorizontalAlignment="Left">
+                <ComboBoxItem>Drama</ComboBoxItem>
+                <ComboBoxItem>Dystopi</ComboBoxItem>
+                <ComboBoxItem>Facklitteratur</ComboBoxItem>
+                <ComboBoxItem>Fantasy</ComboBoxItem>
+                <ComboBoxItem>Historisk</ComboBoxItem>
+                <ComboBoxItem>Klassiker</ComboBoxItem>
+                <ComboBoxItem>Magisk realism</ComboBoxItem>
+                <ComboBoxItem>Mysterium</ComboBoxItem>
+                <ComboBoxItem>Roman</ComboBoxItem>
+                <ComboBoxItem>Romantik</ComboBoxItem>
+                <ComboBoxItem>Science fiction</ComboBoxItem>
+                <ComboBoxItem>Skräck</ComboBoxItem>
+                <ComboBoxItem>Ungdomslitteratur</ComboBoxItem>
+                <ComboBoxItem>Äventyr</ComboBoxItem>
+                <ComboBoxItem>Övrigt</ComboBoxItem>
+            </ComboBox>
+
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,15">
+                <Label Content="Lagersaldo:" FontWeight="Bold" Margin="0,10,0,0" VerticalAlignment="Center"/>
+                <TextBox Text="" Margin="5" Height="25" Width="70" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
+                <Button Content="Avbryt" Margin="15,10" Height="20" Width="60" Click="Button_Click"/>
+                <Button Content="Spara" Margin="15,10" Height="20" Width="60" Command=""/>
+            </StackPanel>
+
+
+
+        </StackPanel>
+    </Grid>
+</Window>

@@ -1,4 +1,5 @@
 ﻿using DatabasLabb2.Infrastructure.Data.Model;
+using DatabasLabb2.Presentation.Dialogs;
 using DatabasLabb2.Presentation.ViewModels;
 using System.Text;
 using System.Windows;
@@ -27,7 +28,10 @@ namespace DatabasLabb2.Presentation
 
         private void OpenEditBookWindow(object obj)
         {
-            throw new NotImplementedException();
+            
+                var window = new EditBookWindow();
+                window.ShowDialog();
+            
         }
     }
 }
