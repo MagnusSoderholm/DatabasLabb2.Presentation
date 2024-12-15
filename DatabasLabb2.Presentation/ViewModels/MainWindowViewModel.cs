@@ -51,7 +51,7 @@ namespace DatabasLabb2.Presentation.ViewModels
         public DelegateCommand DeleteBookCommand { get; }
         public Action<object> EditBook { get; set; }
 
-        public Action<string> ShowMessageDeleteBook { get; set; }
+        public Action<object> DeleteBook { get; set; }
 
         public MainWindowViewModel()
         {
@@ -68,7 +68,7 @@ namespace DatabasLabb2.Presentation.ViewModels
         private bool CanDeleteBook(object? arg) => SelectedRow is not null;
 
 
-        private void DoDeleteBook(object obj) => ShowMessageDeleteBook?.Invoke($"Är du säker på att du vill ta bort {SelectedRow.IsbnNavigation.Titel}?");
+        private void DoDeleteBook(object obj) => DeleteBook(obj);
 
         private void DoEditBook(object obj) => EditBook(obj);
         
