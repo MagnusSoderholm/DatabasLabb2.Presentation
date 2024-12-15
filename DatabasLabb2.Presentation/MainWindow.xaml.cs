@@ -22,7 +22,12 @@ namespace DatabasLabb2.Presentation
         {
             InitializeComponent();
 
-           DataContext = new MainWindowViewModel();
+            DataContext = new MainWindowViewModel() { EditBook = OpenEditBookWindow };
+        }
+
+        private void OpenEditBookWindow(object obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

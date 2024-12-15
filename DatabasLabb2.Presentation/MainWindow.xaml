@@ -22,6 +22,12 @@
                       DisplayMemberPath="Namn"
                       SelectedItem="{Binding SelectedStore}"
                       />
+            <Button Content="Redigera" 
+                    VerticalAlignment="Center" 
+                    Margin="10" 
+                    Width="70"
+                    Command="{Binding EditBookCommand}"
+                    />
 
         </StackPanel>
 
@@ -29,7 +35,11 @@
         <DataGrid Grid.Row="1"
               AutoGenerateColumns="False"
               IsReadOnly="True"
-              ItemsSource="{Binding LagerSaldos}">
+              ItemsSource="{Binding LagerSaldos}"
+                  SelectedItem="{Binding SelectedRow}"
+                  SelectionMode="Single"
+                  >
+           
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Lagersaldo" Width="95">
                     <DataGridTemplateColumn.CellTemplate>

@@ -1,5 +1,6 @@
 ﻿using DatabasLabb2.Domain;
 using DatabasLabb2.Infrastructure.Data.Model;
+using DatabasLabb2.Presentation.Command;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.ObjectModel;
 
@@ -19,12 +20,11 @@ namespace DatabasLabb2.Presentation.ViewModels
                 _selectedStore = value;
 
 
-                if (_selectedStore != null) // Kontrollera att en butik är vald
+                if (_selectedStore != null)
                 {
                     LoadLagerSaldo();
                 }
 
-                //LoadLagerSaldo();
 
                 RaisePropertyChanged();
 
@@ -32,14 +32,38 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
-        public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
+        private LagerSaldo? _selectedRow;
+        public LagerSaldo? SelectedRow
+        {
+            get => _selectedRow;
+            set
+            {
+                _selectedRow = value;
+                RaisePropertyChanged(); 
+                EditBookCommand?.RaiseCanExecuteChanged();
+            }
+        }
 
+
+        public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
+        public DelegateCommand EditBookCommand { get; }
+
+        public Action<object> EditBook { get; set; }
 
         public MainWindowViewModel()
         {
+
+            EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
             LoadStores();
            
         }
+
+        private void DoEditBook(object obj) => EditBook(obj);
+        
+
+        private bool CanEditBook(object? arg) => SelectedRow is not null;
+       
+
 
         private void LoadStores()
         {
