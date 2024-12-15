@@ -14,4 +14,5 @@ public partial class LagerSaldo
     public virtual Butiker Butik { get; set; } = null!;
 
     public virtual Böcker IsbnNavigation { get; set; } = null!;
+    public string SaldoText => Antal == 0 ?  " <Slut i lager> " : Antal.ToString();
 }

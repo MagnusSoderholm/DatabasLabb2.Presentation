@@ -31,12 +31,32 @@
               IsReadOnly="True"
               ItemsSource="{Binding LagerSaldos}">
             <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Lagersaldo" Width="95">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding SaldoText}">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Style.Triggers>
+                                            <!-- Trigger för när det är "Slut i lager" -->
+                                            <DataTrigger Binding="{Binding SaldoText}" Value="Slut i lager">
+                                                <Setter Property="Foreground" Value="Red" />
+                                                <Setter Property="FontStyle" Value="Italic" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
                 <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
                 <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
-                <DataGridTextColumn Header="Lagersaldo" Binding="{Binding Antal}"/>
+             
                
             </DataGrid.Columns>
         </DataGrid>
