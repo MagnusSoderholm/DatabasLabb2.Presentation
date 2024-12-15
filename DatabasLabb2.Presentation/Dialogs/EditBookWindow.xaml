@@ -13,33 +13,37 @@
 
             
                 <Label Content="Boktitel:" FontWeight="Bold"/>
-            <TextBox Text="{Binding SelectedRow.IsbnNavigation.Titel}" Margin="5,0" Height="25" Width="250" HorizontalAlignment="Left"/>
+            <TextBox Text="{Binding SelectedRow.IsbnNavigation.Titel}" Margin="5,0" Height="23" Width="250" HorizontalAlignment="Left" />
             <StackPanel Orientation="Horizontal">
-                <Label Content="ISBN13:" FontWeight="Bold" FontSize="10" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding SelectedRow.Isbn}" Margin="5" Height="25" Width="200" HorizontalAlignment="Left"/>
-
+                <Label Content="ISBN13:" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBox Text="{Binding SelectedRow.Isbn}" Margin="5" Height="23" Width="100" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             </StackPanel>
-            <Label Content="Författare:" FontWeight="Bold" Margin="0,10,0,0"/>
+
+            <Separator Margin="0,5,0,5" />
+
+            <Label Content="Författare:" FontWeight="Bold" />
             <StackPanel Orientation="Horizontal">
-                <Label Content="Förnamn" Margin="5,0" Height="25" Width="120" HorizontalAlignment="Left" />
-                <Label Content="Efternamn" Margin="5,0" Height="25" Width="120" HorizontalAlignment="Left"/>
+                <Label Content="Förnamn"  FontWeight="Bold" Margin="5,0" Height="23" Width="120" HorizontalAlignment="Left" />
+                <Label Content="Efternamn"  FontWeight="Bold" Margin="5,0" Height="23" Width="120" HorizontalAlignment="Left"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <TextBox Text="{Binding SelectedRow.IsbnNavigation.Författare.Förnamn}" 
                          Margin="5,0,5,5" 
-                         Height="25" 
+                         Height="23" 
                          Width="120" 
                          HorizontalAlignment="Left" />
                 <TextBox Text="{Binding SelectedRow.IsbnNavigation.Författare.Efternamn}" 
                          Margin="5,0,5,5" 
-                         Height="25" 
+                         Height="23" 
                          Width="120" 
                          HorizontalAlignment="Left"/>
             </StackPanel>
 
-            
-                    <Label Content="Språk" FontWeight="Bold"/>
-            <ComboBox Text="{Binding SelectedRow.IsbnNavigation.Språk}" Margin="5,0" Height="25" Width="150" HorizontalAlignment="Left">
+            <Separator Margin="0,5,0,5" />
+
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Språk" FontWeight="Bold"/>
+            <ComboBox Text="{Binding SelectedRow.IsbnNavigation.Språk}" Margin="5,0" Height="23" Width="80" HorizontalAlignment="Left">
                 <ComboBoxItem>Svenska</ComboBoxItem>
                 <ComboBoxItem>Engelska</ComboBoxItem>
                 <ComboBoxItem>Danska</ComboBoxItem>
@@ -50,7 +54,7 @@
             </ComboBox>
 
             <Label Content="Genre" FontWeight="Bold"/>
-            <ComboBox Text="{Binding SelectedRow.IsbnNavigation.Genre}" Margin="5,0" Height="25" Width="150" HorizontalAlignment="Left">
+            <ComboBox Text="{Binding SelectedRow.IsbnNavigation.Genre}" Margin="5,0" Height="23" Width="120" HorizontalAlignment="Left">
                 <ComboBoxItem>Drama</ComboBoxItem>
                 <ComboBoxItem>Dystopi</ComboBoxItem>
                 <ComboBoxItem>Facklitteratur</ComboBoxItem>
@@ -67,13 +71,18 @@
                 <ComboBoxItem>Äventyr</ComboBoxItem>
                 <ComboBoxItem>Övrigt</ComboBoxItem>
             </ComboBox>
-
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,15">
-                <Label Content="Lagersaldo:" FontWeight="Bold" Margin="0,10,0,0" VerticalAlignment="Center"/>
-                <TextBox Text="{Binding SelectedRow.Antal}" Margin="5" Height="25" Width="70" HorizontalAlignment="Left"/>
             </StackPanel>
 
+            <Separator Margin="0,15,0,5" />
 
+            <StackPanel Orientation="Horizontal" Margin="0,15">
+                <Label Content="Lagersaldo:" FontWeight="Bold" Margin="5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedRow.Antal}" Height="23" Width="30" HorizontalAlignment="Left"/>
+                <Label Content="Pris:" FontWeight="Bold" Margin="40,5,5,5" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
+                <TextBox Text="{Binding SelectedRow.IsbnNavigation.Pris}" Height="23" Width="50" HorizontalAlignment="Left"/>
+            </StackPanel>
+
+            <Separator Margin="0,5,0,5" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="25">
                 <Button Content="Avbryt" Margin="15,10" Height="20" Width="60" Click="Button_Click"/>
                 <Button Content="Spara" Margin="15,10" Height="20" Width="60" Command=""/>

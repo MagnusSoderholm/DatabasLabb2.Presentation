@@ -20,6 +20,7 @@ namespace DatabasLabb2.Presentation.Dialogs
     /// </summary>
     public partial class EditBookWindow : Window
     {
+
         public EditBookWindow()
         {
             InitializeComponent();
