@@ -28,10 +28,13 @@ namespace DatabasLabb2.Presentation
 
         private void OpenEditBookWindow(object obj)
         {
-            
-                var window = new EditBookWindow();
-                window.ShowDialog();
-            
+
+            var editBookWindow = new EditBookWindow
+            {
+                DataContext = this.DataContext
+            };
+            editBookWindow.ShowDialog();
+
         }
     }
 }

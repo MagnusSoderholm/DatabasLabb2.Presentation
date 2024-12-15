@@ -63,6 +63,7 @@
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
                 <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
+                <DataGridTextColumn Header="Genre" Binding="{Binding IsbnNavigation.Genre}"/>
                 <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
              
                
