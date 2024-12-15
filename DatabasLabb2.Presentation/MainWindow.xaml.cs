@@ -23,7 +23,11 @@ namespace DatabasLabb2.Presentation
         {
             InitializeComponent();
 
-            DataContext = new MainWindowViewModel() { EditBook = OpenEditBookWindow };
+            DataContext = new MainWindowViewModel()
+            {
+                EditBook = OpenEditBookWindow,
+                ShowMessageDeleteBook = message => MessageBox.Show(message)
+            };
         }
 
         private void OpenEditBookWindow(object obj)
@@ -34,6 +38,7 @@ namespace DatabasLabb2.Presentation
                 DataContext = this.DataContext
             };
             editBookWindow.ShowDialog();
+
 
         }
     }

@@ -41,22 +41,34 @@ namespace DatabasLabb2.Presentation.ViewModels
                 _selectedRow = value;
                 RaisePropertyChanged(); 
                 EditBookCommand?.RaiseCanExecuteChanged();
+                DeleteBookCommand?.RaiseCanExecuteChanged();
             }
         }
 
 
         public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
         public DelegateCommand EditBookCommand { get; }
-
+        public DelegateCommand DeleteBookCommand { get; }
         public Action<object> EditBook { get; set; }
+
+        public Action<string> ShowMessageDeleteBook { get; set; }
 
         public MainWindowViewModel()
         {
 
             EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
+            DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
+
             LoadStores();
+
+
            
         }
+
+        private bool CanDeleteBook(object? arg) => SelectedRow is not null;
+
+
+        private void DoDeleteBook(object obj) => ShowMessageDeleteBook?.Invoke($"Är du säker på att du vill ta bort {SelectedRow.IsbnNavigation.Titel}?");
 
         private void DoEditBook(object obj) => EditBook(obj);
         

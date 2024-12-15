@@ -29,6 +29,20 @@
                     Command="{Binding EditBookCommand}"
                     />
 
+            <Button Content="Skapa" 
+                    VerticalAlignment="Center" 
+                    Margin="10" 
+                    Width="70"
+                    Command="{Binding }"
+                    />
+
+            <Button Content="Radera" 
+                    VerticalAlignment="Center" 
+                    Margin="10" 
+                    Width="70"
+                    Command="{Binding DeleteBookCommand}"
+                    />
+
         </StackPanel>
 
 
