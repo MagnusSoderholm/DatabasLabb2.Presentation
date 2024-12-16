@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabasLabb2.Presentation.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace DatabasLabb2.Presentation.Dialogs
         public AddBookWindow()
         {
             InitializeComponent();
+            DataContext = new MainWindowViewModel();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
