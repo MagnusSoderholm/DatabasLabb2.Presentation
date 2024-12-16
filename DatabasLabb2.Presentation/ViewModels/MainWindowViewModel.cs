@@ -42,6 +42,7 @@ namespace DatabasLabb2.Presentation.ViewModels
                 RaisePropertyChanged(); 
                 EditBookCommand?.RaiseCanExecuteChanged();
                 DeleteBookCommand?.RaiseCanExecuteChanged();
+                AddBookCommand?.RaiseCanExecuteChanged();
             }
         }
 
@@ -49,21 +50,26 @@ namespace DatabasLabb2.Presentation.ViewModels
         public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
         public DelegateCommand EditBookCommand { get; }
         public DelegateCommand DeleteBookCommand { get; }
+        public DelegateCommand AddBookCommand { get; }
         public Action<object> EditBook { get; set; }
-
         public Action<object> DeleteBook { get; set; }
+
+        public Action<object> AddBook { get; set; }
 
         public MainWindowViewModel()
         {
 
             EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
             DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
+            AddBookCommand = new DelegateCommand(DoAddBook);
 
             LoadStores();
 
 
            
         }
+
+        private void DoAddBook(object obj) => AddBook(obj);
 
         private bool CanDeleteBook(object? arg) => SelectedRow is not null;
 

@@ -26,7 +26,8 @@ namespace DatabasLabb2.Presentation
             DataContext = new MainWindowViewModel()
             {
                 EditBook = OpenEditBookWindow,
-                DeleteBook = OpenDeleteBookWindow
+                DeleteBook = OpenDeleteBookWindow,
+                AddBook = OpenAddBookWindow
             };
         }
 
@@ -52,6 +53,15 @@ namespace DatabasLabb2.Presentation
             deleteBookWindow.ShowDialog();
 
 
+        }
+
+        private void OpenAddBookWindow(object obj)
+        {
+            var addBookWindow = new AddBookWindow
+            {
+                DataContext = this.DataContext
+            };
+            addBookWindow.ShowDialog();
         }
     }
 }

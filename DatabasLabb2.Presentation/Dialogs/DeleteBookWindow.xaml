@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DatabasLabb2.Presentation.Dialogs"
-                xmlns:UI="clr-namespace:DatabasLabb2.Presentation.ViewModels"
-mc:Ignorable="d"
-d:DataContext="{d:DesignInstance Type=UI:MainWindowViewModel, IsDesignTimeCreatable=True}"
+        xmlns:UI="clr-namespace:DatabasLabb2.Presentation.ViewModels"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=UI:MainWindowViewModel, IsDesignTimeCreatable=True}"
         Title="DeleteBookWindow" Height="250" Width="350">
     <Grid>
         <StackPanel>

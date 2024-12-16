@@ -29,14 +29,14 @@
                     Command="{Binding EditBookCommand}"
                     />
 
-            <Button Content="Skapa" 
+            <Button Content="Lägg till" 
                     VerticalAlignment="Center" 
                     Margin="10" 
                     Width="70"
-                    Command="{Binding }"
+                    Command="{Binding AddBookCommand}"
                     />
 
-            <Button Content="Radera" 
+            <Button Content="Ta bort" 
                     VerticalAlignment="Center" 
                     Margin="10" 
                     Width="70"
@@ -73,12 +73,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
                 <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
                 <DataGridTextColumn Header="Genre" Binding="{Binding IsbnNavigation.Genre}"/>
-                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
+                
              
                
             </DataGrid.Columns>
