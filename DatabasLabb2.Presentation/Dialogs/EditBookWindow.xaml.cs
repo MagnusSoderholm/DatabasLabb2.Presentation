@@ -28,6 +28,10 @@ namespace DatabasLabb2.Presentation.Dialogs
 
             
         }
-        private void Button_Click(object sender, RoutedEventArgs e) => Close();
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
     } 
 }

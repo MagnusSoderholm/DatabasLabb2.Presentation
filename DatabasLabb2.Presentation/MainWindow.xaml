@@ -81,7 +81,7 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="ISBN13" Binding="{Binding Isbn}"/>
+                <DataGridTextColumn Header="ISBN13" Binding="{Binding IsbnNavigation.Isbn13}"/>
                 <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>

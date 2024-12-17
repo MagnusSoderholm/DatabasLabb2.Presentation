@@ -9,12 +9,53 @@ namespace DatabasLabb2.Presentation.ViewModels
 {
     internal class MainWindowViewModel : ViewModelBase
     {
+        public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; } = new ObservableCollection<LagerSaldo>();
+        public DelegateCommand EditBookCommand { get; }
+        public DelegateCommand DeleteBookCommand { get; }
+        public DelegateCommand AddBookCommand { get; }
+        public DelegateCommand AddBookToStoreCommand { get; }
+        public DelegateCommand DeleteBookFromStoreCommand { get; }
+        public DelegateCommand UpdateBookCommand { get; }
+        public DelegateCommand SaveCommand { get; }
+        public DelegateCommand CancelCommand { get; }
+        public Action<object> EditBook { get; set; }
+        public Action<object> DeleteBook { get; set; }
+        public Action<object> AddBook { get; set; }
         public ObservableCollection<Butiker> Stores { get; private set; }
+        public ObservableCollection<Böcker> Books { get; private set; } = new ObservableCollection<Böcker>();
 
-        public ObservableCollection<Böcker> Books { get; private set; }
+
+
+        public MainWindowViewModel()
+        {
+            EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
+            DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
+            AddBookCommand = new DelegateCommand(DoAddBook);
+            AddBookToStoreCommand = new DelegateCommand(AddBookToStore);
+            DeleteBookFromStoreCommand = new DelegateCommand(DoDeleteBookFromStore);
+            UpdateBookCommand = new DelegateCommand(UpdateBook);
+
+
+            LoadBooks();
+            LoadStores();
+            
+
+        }
+
+        private void UpdateBook(object obj)
+        {
+            // DENNA KOD SKA SPARA ALLA UPPDATERINGAR MAN GÖR NÄR MAN REDIGERAR
+
+            LoadLagerSaldo();
+
+            if (obj is Window window)
+            {
+
+                window.Close();
+            }
+        }
 
         private Butiker? _selectedStore;
-
         public Butiker? SelectedStore
         {
             get => _selectedStore;
@@ -35,6 +76,8 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
+
+
         private Böcker? _selectedBook;
         public Böcker? SelectedBook
         {
@@ -45,6 +88,8 @@ namespace DatabasLabb2.Presentation.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+
 
         private string _lagerSaldo;
         public string LagerSaldo
@@ -57,6 +102,8 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
+
+
         private LagerSaldo? _selectedRow;
         public LagerSaldo? SelectedRow
         {
@@ -64,43 +111,13 @@ namespace DatabasLabb2.Presentation.ViewModels
             set
             {
                 _selectedRow = value;
-                RaisePropertyChanged(); 
+                RaisePropertyChanged();
                 EditBookCommand?.RaiseCanExecuteChanged();
                 DeleteBookCommand?.RaiseCanExecuteChanged();
                 AddBookCommand?.RaiseCanExecuteChanged();
             }
         }
 
-
-        public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; }
-        public DelegateCommand EditBookCommand { get; }
-        public DelegateCommand DeleteBookCommand { get; }
-        public DelegateCommand AddBookCommand { get; }
-        public DelegateCommand AddBookToStoreCommand { get; }
-        public DelegateCommand DeleteBookFromStoreCommand { get; }
-        public DelegateCommand SaveCommand { get; }
-        public DelegateCommand CancelCommand { get; }
-        public Action<object> EditBook { get; set; }
-        public Action<object> DeleteBook { get; set; }
-
-        public Action<object> AddBook { get; set; }
-
-        public MainWindowViewModel()
-        {
-
-            EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
-            DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
-            AddBookCommand = new DelegateCommand(DoAddBook);
-            AddBookToStoreCommand = new DelegateCommand(AddBookToStore);
-            DeleteBookFromStoreCommand = new DelegateCommand(DoDeleteBookFromStore);
-
-
-            LoadBooks();
-            LoadStores();
-        
-
-
-        }
 
         private void DoDeleteBookFromStore(object obj)
         {
@@ -120,14 +137,23 @@ namespace DatabasLabb2.Presentation.ViewModels
                 db.LagerSaldos.Remove(existingLagerSaldo);
                 db.SaveChanges();
                 MessageBox.Show("Boken har tagits bort från butiken.");
+
+
+                LoadLagerSaldo();
+
+                if (obj is Window window)
+                {
+
+                    window.Close();
+                }
             }
             else
             {
                 MessageBox.Show("Den här boken finns inte i den valda butiken.");
             }
-
-            LoadLagerSaldo();
         }
+
+
 
         private void AddBookToStore(object obj)
         {
@@ -145,52 +171,65 @@ namespace DatabasLabb2.Presentation.ViewModels
 
             using var db = new BokhandelContext();
 
+            // Kontrollera om boken redan finns i butiken
             var existingEntry = db.LagerSaldos
                 .FirstOrDefault(ls => ls.Isbn == SelectedBook.Isbn13 && ls.ButikId == SelectedStore.Id);
 
             if (existingEntry != null)
             {
-                MessageBox.Show("Den här boken finns redan i denna butik.");
-                return;
+                
+                existingEntry.Antal += antal;
+                db.SaveChanges();
+                MessageBox.Show("Lagersaldo har uppdaterats.");
+            }
+            else
+            {
+                var newLagerSaldo = new LagerSaldo
+                {
+                    Isbn = SelectedBook.Isbn13,
+                    ButikId = SelectedStore.Id,
+                    Antal = antal
+                };
+
+                db.LagerSaldos.Add(newLagerSaldo);
+                db.SaveChanges();
+                MessageBox.Show("Boken har lagts till i butiken!");
             }
 
-           
-            var newLagerSaldo = new LagerSaldo
+            LoadLagerSaldo();
+
+            if (obj is Window window)
             {
-                Isbn = SelectedBook.Isbn13,
-                ButikId = SelectedStore.Id,
-                Antal = antal
-            };
-
-            db.LagerSaldos.Add(newLagerSaldo);
-            db.SaveChanges();
-
-            MessageBox.Show("Boken har lagts till i butiken!");
-            LoadDistinctBooks();
+                window.Close();
+            }
         }
+
+
+
         private void LoadDistinctBooks()
         {
             using var db = new BokhandelContext();
 
-            db.Böckers
+            var distinctBooks = db.Böckers
                 .GroupBy(b => b.Isbn13)
                 .Select(g => g.FirstOrDefault())
                 .ToList();
 
+            Books.Clear();
+            foreach (var book in distinctBooks)
+            {
+                Books.Add(book);
+            }
+
+            RaisePropertyChanged(nameof(Books));
+
         }
 
         private void DoAddBook(object obj) => AddBook(obj);
-
         private bool CanDeleteBook(object? arg) => SelectedRow is not null;
-
-
         private void DoDeleteBook(object obj) => DeleteBook(obj);
-
         private void DoEditBook(object obj) => EditBook(obj);
-        
-
         private bool CanEditBook(object? arg) => SelectedRow is not null;
-       
 
 
         private void LoadStores()
@@ -206,34 +245,53 @@ namespace DatabasLabb2.Presentation.ViewModels
         }
 
 
-        private void LoadLagerSaldo()
+        public void LoadLagerSaldo()
         {
             using var db = new BokhandelContext();
 
-            LagerSaldos = new ObservableCollection<LagerSaldo>(
-                db.LagerSaldos
+            var lagerSaldoData = db.LagerSaldos
                 .Where(l => l.ButikId == SelectedStore.Id)
                 .Include(l => l.IsbnNavigation)
                 .ThenInclude(l => l.Författare)
-                .ToList()
-                );
+                .ToList();
 
+           
+            LagerSaldos.Clear();
 
+            var distinctBooks = lagerSaldoData
+                .GroupBy(l => l.Isbn)
+                .Select(g => g.FirstOrDefault())
+                .ToList();
+
+            foreach (var item in distinctBooks)
+            {
+                LagerSaldos.Add(item);
+            }
+
+            RaisePropertyChanged(nameof(LagerSaldos));
         }
+
+
 
         private void LoadBooks()
         {
-
             using var db = new BokhandelContext();
 
-            Books = new ObservableCollection<Böcker>(
-                 db.Böckers
-                 .ToList()
-                 );
+            var allBooks = db.Böckers.ToList();
+
+            Books.Clear();
+
+            foreach (var book in allBooks
+                .GroupBy(b => b.Isbn13)
+                .Select(g => g.FirstOrDefault()))
+            {
+                Books.Add(book);
+            }
 
             SelectedBook = Books.FirstOrDefault();
         }
 
-   
     }
+    
 }
+
