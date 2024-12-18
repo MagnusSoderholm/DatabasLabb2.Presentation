@@ -54,12 +54,13 @@
         </StackPanel>
 
 
-        <DataGrid Grid.Row="1"
-              AutoGenerateColumns="False"
-              IsReadOnly="True"
-              ItemsSource="{Binding LagerSaldos}"
+        <DataGrid Grid.Row="1"            
+                  AutoGenerateColumns="False" 
+                  IsReadOnly="True"
+                  ItemsSource="{Binding LagerSaldos}"
                   SelectedItem="{Binding SelectedRow}"
                   SelectionMode="Single"
+                  AlternatingRowBackground="LightGray"
                   >
            
             <DataGrid.Columns>
