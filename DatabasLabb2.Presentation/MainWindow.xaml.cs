@@ -25,23 +25,23 @@ namespace DatabasLabb2.Presentation
 
             DataContext = new MainWindowViewModel()
             {
-                EditBook = OpenEditBookWindow,
+                //EditBook = OpenEditBookWindow,
                 DeleteBook = OpenDeleteBookWindow,
                 AddBook = OpenAddBookWindow
             };
         }
 
-        private void OpenEditBookWindow(object obj)
-        {
+        //private void OpenEditBookWindow(object obj)
+        //{
 
-            var editBookWindow = new EditBookWindow
-            {
-                DataContext = this.DataContext
-            };
-            editBookWindow.ShowDialog();
+        //    var editBookWindow = new EditBookWindow
+        //    {
+        //        DataContext = this.DataContext
+        //    };
+        //    editBookWindow.ShowDialog();
 
 
-        }
+        //}
 
         private void OpenDeleteBookWindow(object obj)
         {

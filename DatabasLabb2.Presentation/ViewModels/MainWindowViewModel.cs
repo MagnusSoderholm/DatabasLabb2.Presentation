@@ -10,15 +10,14 @@ namespace DatabasLabb2.Presentation.ViewModels
     internal class MainWindowViewModel : ViewModelBase
     {
         public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; } = new ObservableCollection<LagerSaldo>();
-        public DelegateCommand EditBookCommand { get; }
+        //public DelegateCommand EditBookCommand { get; }
         public DelegateCommand DeleteBookCommand { get; }
         public DelegateCommand AddBookCommand { get; }
         public DelegateCommand AddBookToStoreCommand { get; }
         public DelegateCommand DeleteBookFromStoreCommand { get; }
-        public DelegateCommand UpdateBookCommand { get; }
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        public Action<object> EditBook { get; set; }
+        //public Action<object> EditBook { get; set; }
         public Action<object> DeleteBook { get; set; }
         public Action<object> AddBook { get; set; }
         public ObservableCollection<Butiker> Stores { get; private set; }
@@ -28,12 +27,13 @@ namespace DatabasLabb2.Presentation.ViewModels
 
         public MainWindowViewModel()
         {
-            EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
+            //EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
             DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
             AddBookCommand = new DelegateCommand(DoAddBook);
             AddBookToStoreCommand = new DelegateCommand(AddBookToStore);
             DeleteBookFromStoreCommand = new DelegateCommand(DoDeleteBookFromStore);
-            UpdateBookCommand = new DelegateCommand(UpdateBook);
+            SaveCommand = new DelegateCommand(SaveChanges);
+            CancelCommand = new DelegateCommand(CancelChanges);
 
 
             LoadBooks();
@@ -42,18 +42,41 @@ namespace DatabasLabb2.Presentation.ViewModels
 
         }
 
-        private void UpdateBook(object obj)
+        private void CancelChanges(object obj)
         {
-            // DENNA KOD SKA SPARA ALLA UPPDATERINGAR MAN GÖR NÄR MAN REDIGERAR
-
-            LoadLagerSaldo();
-
             if (obj is Window window)
             {
-
                 window.Close();
             }
         }
+
+        private void SaveChanges(object obj)
+        {
+            if (SelectedRow != null)
+            {
+                using (var db = new BokhandelContext())
+                {
+                    var existingLagerSaldo = db.LagerSaldos
+                        .FirstOrDefault(l => l.ButikId == SelectedRow.ButikId);
+
+                    if (existingLagerSaldo != null)
+                    {
+                      
+                        existingLagerSaldo.Antal = SelectedRow.Antal; 
+                        db.SaveChanges();
+                    }
+                }
+
+                LoadLagerSaldo();
+            }
+
+            if (obj is Window window)
+            {
+                window.Close();
+            }
+        }
+
+      
 
         private Butiker? _selectedStore;
         public Butiker? SelectedStore
@@ -112,7 +135,7 @@ namespace DatabasLabb2.Presentation.ViewModels
             {
                 _selectedRow = value;
                 RaisePropertyChanged();
-                EditBookCommand?.RaiseCanExecuteChanged();
+                //EditBookCommand?.RaiseCanExecuteChanged();
                 DeleteBookCommand?.RaiseCanExecuteChanged();
                 AddBookCommand?.RaiseCanExecuteChanged();
             }
@@ -130,7 +153,7 @@ namespace DatabasLabb2.Presentation.ViewModels
             using var db = new BokhandelContext();
 
             var existingLagerSaldo = db.LagerSaldos
-                .FirstOrDefault(ls => ls.Isbn == SelectedBook.Isbn13 && ls.ButikId == SelectedStore.Id);
+                .FirstOrDefault(ls => ls.Isbn == SelectedRow.IsbnNavigation.Isbn13 && ls.ButikId == SelectedStore.Id);
 
             if (existingLagerSaldo != null)
             {
@@ -171,7 +194,7 @@ namespace DatabasLabb2.Presentation.ViewModels
 
             using var db = new BokhandelContext();
 
-            // Kontrollera om boken redan finns i butiken
+  
             var existingEntry = db.LagerSaldos
                 .FirstOrDefault(ls => ls.Isbn == SelectedBook.Isbn13 && ls.ButikId == SelectedStore.Id);
 
@@ -228,8 +251,8 @@ namespace DatabasLabb2.Presentation.ViewModels
         private void DoAddBook(object obj) => AddBook(obj);
         private bool CanDeleteBook(object? arg) => SelectedRow is not null;
         private void DoDeleteBook(object obj) => DeleteBook(obj);
-        private void DoEditBook(object obj) => EditBook(obj);
-        private bool CanEditBook(object? arg) => SelectedRow is not null;
+        //private void DoEditBook(object obj) => EditBook(obj);
+        //private bool CanEditBook(object? arg) => SelectedRow is not null;
 
 
         private void LoadStores()
