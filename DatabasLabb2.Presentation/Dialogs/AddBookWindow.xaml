@@ -43,11 +43,8 @@
                 <Button Content="Avbryt" Margin="15,10" Height="20" Width="60" Click="Button_Click"/>
 
                 <Button Content="Lägg till" Margin="15,10" Height="20" Width="60" Command="{Binding AddBookToStoreCommand}" CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}"/>
-                
+
             </StackPanel>
-
-
-
         </StackPanel>
     </Grid>
 </Window>

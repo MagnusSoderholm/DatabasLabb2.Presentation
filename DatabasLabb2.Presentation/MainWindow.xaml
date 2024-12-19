@@ -22,13 +22,7 @@
                       DisplayMemberPath="Namn"
                       SelectedItem="{Binding SelectedStore}"
                       />
-            <!--<Button Content="Redigera" 
-                    VerticalAlignment="Center" 
-                    Margin="10" 
-                    Width="70"
-                    Command="{Binding EditBookCommand}"
-                    />-->
-
+         
             
             <Button Content="Lägg till" 
                     VerticalAlignment="Center" 
@@ -43,13 +37,6 @@
                     Width="70"
                     Command="{Binding DeleteBookCommand}"
                     />
-
-            <!--<Button Content="Ny Bok" 
-         VerticalAlignment="Center" 
-         Margin="10" 
-         Width="70"
-         Command="{Binding }"
-         />-->
 
         </StackPanel>
 

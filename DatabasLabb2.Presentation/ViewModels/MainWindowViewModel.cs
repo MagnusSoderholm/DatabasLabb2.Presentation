@@ -10,14 +10,12 @@ namespace DatabasLabb2.Presentation.ViewModels
     internal class MainWindowViewModel : ViewModelBase
     {
         public ObservableCollection<LagerSaldo> LagerSaldos { get; private set; } = new ObservableCollection<LagerSaldo>();
-        //public DelegateCommand EditBookCommand { get; }
         public DelegateCommand DeleteBookCommand { get; }
         public DelegateCommand AddBookCommand { get; }
         public DelegateCommand AddBookToStoreCommand { get; }
         public DelegateCommand DeleteBookFromStoreCommand { get; }
         public DelegateCommand SaveCommand { get; }
         public DelegateCommand CancelCommand { get; }
-        //public Action<object> EditBook { get; set; }
         public Action<object> DeleteBook { get; set; }
         public Action<object> AddBook { get; set; }
         public ObservableCollection<Butiker> Stores { get; private set; }
@@ -27,7 +25,7 @@ namespace DatabasLabb2.Presentation.ViewModels
 
         public MainWindowViewModel()
         {
-            //EditBookCommand = new DelegateCommand(DoEditBook, CanEditBook);
+           
             DeleteBookCommand = new DelegateCommand(DoDeleteBook, CanDeleteBook);
             AddBookCommand = new DelegateCommand(DoAddBook);
             AddBookToStoreCommand = new DelegateCommand(AddBookToStore);
@@ -35,13 +33,10 @@ namespace DatabasLabb2.Presentation.ViewModels
             SaveCommand = new DelegateCommand(SaveChanges);
             CancelCommand = new DelegateCommand(CancelChanges);
 
-
             LoadBooks();
             LoadStores();
-            
-
+          
         }
-
         private void CancelChanges(object obj)
         {
             if (obj is Window window)
@@ -76,8 +71,6 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
-      
-
         private Butiker? _selectedStore;
         public Butiker? SelectedStore
         {
@@ -99,8 +92,6 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
-
-
         private Böcker? _selectedBook;
         public Böcker? SelectedBook
         {
@@ -108,10 +99,10 @@ namespace DatabasLabb2.Presentation.ViewModels
             set
             {
                 _selectedBook = value;
+
                 RaisePropertyChanged();
             }
         }
-
 
 
         private string _lagerSaldo;
@@ -125,8 +116,6 @@ namespace DatabasLabb2.Presentation.ViewModels
             }
         }
 
-
-
         private LagerSaldo? _selectedRow;
         public LagerSaldo? SelectedRow
         {
@@ -135,7 +124,6 @@ namespace DatabasLabb2.Presentation.ViewModels
             {
                 _selectedRow = value;
                 RaisePropertyChanged();
-                //EditBookCommand?.RaiseCanExecuteChanged();
                 DeleteBookCommand?.RaiseCanExecuteChanged();
                 AddBookCommand?.RaiseCanExecuteChanged();
             }
@@ -228,33 +216,9 @@ namespace DatabasLabb2.Presentation.ViewModels
         }
 
 
-
-        private void LoadDistinctBooks()
-        {
-            using var db = new BokhandelContext();
-
-            var distinctBooks = db.Böckers
-                .GroupBy(b => b.Isbn13)
-                .Select(g => g.FirstOrDefault())
-                .ToList();
-
-            Books.Clear();
-            foreach (var book in distinctBooks)
-            {
-                Books.Add(book);
-            }
-
-            RaisePropertyChanged(nameof(Books));
-
-        }
-
         private void DoAddBook(object obj) => AddBook(obj);
         private bool CanDeleteBook(object? arg) => SelectedRow is not null;
         private void DoDeleteBook(object obj) => DeleteBook(obj);
-        //private void DoEditBook(object obj) => EditBook(obj);
-        //private bool CanEditBook(object? arg) => SelectedRow is not null;
-
-
         private void LoadStores()
         {
 
@@ -293,7 +257,6 @@ namespace DatabasLabb2.Presentation.ViewModels
 
             RaisePropertyChanged(nameof(LagerSaldos));
         }
-
 
 
         private void LoadBooks()

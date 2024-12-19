@@ -11,6 +11,7 @@ namespace DatabasLabb2.Presentation.Command
     {
         private readonly Action<object> execute;
         private readonly Func<object?, bool> canExecute;
+        private Action saveLagerSaldo;
 
         public event EventHandler? CanExecuteChanged;
 
@@ -19,6 +20,11 @@ namespace DatabasLabb2.Presentation.Command
             ArgumentNullException.ThrowIfNull(execute);
             this.execute = execute;
             this.canExecute = canExecute;
+        }
+
+        public DelegateCommand(Action saveLagerSaldo)
+        {
+            this.saveLagerSaldo = saveLagerSaldo;
         }
 
         public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
