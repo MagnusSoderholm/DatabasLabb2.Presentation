@@ -7,7 +7,7 @@
          xmlns:UI="clr-namespace:DatabasLabb2.Presentation.ViewModels"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=UI:MainWindowViewModel, IsDesignTimeCreatable=True}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="833">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -86,6 +86,7 @@
                 <DataGridTextColumn Header="Titel" Binding="{Binding IsbnNavigation.Titel}"/>
                 <DataGridTextColumn Header="Författare" Binding="{Binding IsbnNavigation.Författare.FullName}"/>
                 <DataGridTextColumn Header="Språk" Binding="{Binding IsbnNavigation.Språk}"/>
+                <DataGridTextColumn Header="Format" Binding="{Binding IsbnNavigation.Format}" Width="70"/>
                 <DataGridTextColumn Header="Pris" Binding="{Binding IsbnNavigation.Pris}"/>
                 <DataGridTextColumn Header="Genre" Binding="{Binding IsbnNavigation.Genre}"/>
                 

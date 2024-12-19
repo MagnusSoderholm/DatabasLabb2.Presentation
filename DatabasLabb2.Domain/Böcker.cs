@@ -13,6 +13,8 @@ public partial class Böcker
 
     public decimal? Pris { get; set; }
 
+    public string TitelList => $"{Titel} ({Format})";
+
     public DateOnly? Utgivningsdatum { get; set; }
 
     public int? FörfattareId { get; set; }
